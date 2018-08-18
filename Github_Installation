@@ -1,0 +1,41 @@
+#!/usr/bin/python
+
+#Date Created : 19/08/2018
+#Installation of github using python3
+#yum does not work for python3, hence changing the /usr/bin/yum to python2 is the workable
+#Also, before running, yum install git -y, change "/usr/libexec/urlgrabber-ext-down" to python2
+#You can run the same code using python2 as well
+#To toggle the versions of python, goto /usr/bin/ > ls -lrt python* > change the softlink to the corresponding interpreter(ln -fs <target><file> 
+
+import os
+#import commands
+import subprocess
+import sys
+
+#User Identification
+user = subprocess.getoutput('whoami')
+def root():
+    if user == "root":
+        print("You are good to go")
+    else:
+        subprocess.getoutput('sudo su -')
+#commands.getoutput("sudo su -")
+        print("Changed the directory to root, You are good to go")
+
+def main():
+    check = subprocess.getoutput('git --version')
+    if check == '-bash: git: command not found' or '-bash: /usr/bin/git: No such file or directory':
+        print('You do not have git installed in you system, press yes/YES/1')
+        user_check =input("You want to go ahead with the installation :" )
+        if user_check == "yes" or "YES" or 1:
+            print('you are here')
+            root()
+            #commands.getoutput("yum install git -y")
+            os.system('yum install git -y')
+            #subprocess.run(["yum","install",'-y','git'])
+            print("You have installed the latest git")
+        else:
+            sys.exit(1)
+
+if __name__ == "__main__":
+    main()
