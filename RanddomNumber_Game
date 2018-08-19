@@ -1,0 +1,17 @@
+import os
+import sys
+import random
+#It will prompt the user to check for the random number and try asking you to guess until you get it right
+found =False
+number = random.randint(1,100)
+while not found:
+    user = int(input("Enter a number between 1 and 100 :"))
+    if user == number:
+        print("you have got the right one")
+        found =True
+    elif user < number:
+        print("Little higher")
+    else:
+        print("Little Lower")
+
+print("Thanks for playing this game")
